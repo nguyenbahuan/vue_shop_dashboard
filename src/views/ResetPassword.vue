@@ -75,10 +75,9 @@ import { reactive, onBeforeMount, ref } from "vue";
 import axios from "axios";
 import { toast } from "vue3-toastify";
 import { useRoute, useRouter } from "vue-router";
-// import { authStore } from "@/store/authstore";
+import { HOST_AUTH } from "@/constants";
 const load = ref(null);
 const message = ref(null);
-// const store = authStore();
 const route = useRoute();
 const router = useRouter();
 const formRegister = reactive({
@@ -87,7 +86,7 @@ const formRegister = reactive({
 
 const updatePassword = async () => {
   const res = await axios.post(
-    `http://localhost:8080/reset-password?token=${route.query.token}&email=${route.query.email}`,
+    `${HOST_AUTH}/reset-password?token=${route.query.token}&email=${route.query.email}`,
     formRegister
   );
   if (res.data.payload.statusCode === 1) {
@@ -103,11 +102,10 @@ const updatePassword = async () => {
 
 onBeforeMount(async () => {
   const res = await axios.get(
-    `http://localhost:8080/reset-password?token=${route.query.token}&email=${route.query.email}`
+    `${HOST_AUTH}/reset-password?token=${route.query.token}&email=${route.query.email}`
   );
   if (res.data.payload.statusCode === 1) {
     load.value = false;
-    console.log("///////", load.value);
     return;
   } else {
     load.value = true;
