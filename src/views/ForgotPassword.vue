@@ -62,15 +62,10 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import { reactive } from "vue";
-// import axios from "axios";
+import authService from "@/service/authService";
 import { toast } from "vue3-toastify";
-// import { useRouter } from "vue-router";
-// import { authStore } from "@/store/authstore";
-// const load = ref(false);
-// const store = authStore();
-// const router = useRouter();
+
 const notifySuccess = (mes) => {
   toast(mes, {
     type: "loading",
@@ -82,16 +77,12 @@ const formForgot = reactive({
   email: "",
 });
 const submitForm = async () => {
-  const res = await axios.post(
-    "http://localhost:8080/forgot-password",
-    formForgot
-  );
-  console.log(res.data);
-  if (res.data.payload.message.trim() === "check your email") {
+  const res = await authService.forgotPasswordService(formForgot);
+  if (res.message.trim() === "check your email") {
     formForgot.email = "";
-    notifySuccess(res.data.payload.message);
+    notifySuccess(res.message);
   } else {
-    notifySuccess(res.data.payload.message);
+    notifySuccess(res.message);
   }
 };
 </script>

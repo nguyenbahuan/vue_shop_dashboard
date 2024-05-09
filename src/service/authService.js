@@ -57,5 +57,10 @@ const authService = {
 
     return res.data.payload;
   },
+  async forgotPasswordService(formChange) {
+    const res = await axios.post(`${HOST_AUTH}/forgot-password`, formChange);
+
+    return res.data.payload;
+  },
 };
 export default authService;
