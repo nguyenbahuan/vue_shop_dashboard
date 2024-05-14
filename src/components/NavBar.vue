@@ -118,7 +118,11 @@
           <img
             v-if="storeAuth.user"
             class="object-cover h-8 w-8 rounded-full"
-            :src="HOST_IMAGE + storeAuth.user?.avatar"
+            :src="
+              storeAuth.user?.avatar
+                ? HOST_IMAGE + storeAuth.user?.avatar
+                : '@/assets/logo.png'
+            "
             alt=""
           />
           <img

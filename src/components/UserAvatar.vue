@@ -17,11 +17,7 @@ const props = defineProps({
   },
 });
 
-const avatar = computed(
-  () =>
-    HOST_IMAGE + props.avatar ??
-    `https://flowbite.com/docs/images/products/apple-watch.png`
-);
+const avatar = computed(() => HOST_IMAGE + props.avatar ?? "@/assets/logo.png");
 watch(props.avatar, () => {
   console.log(props.avatar);
   HOST_IMAGE + "/" + props.avatar;
