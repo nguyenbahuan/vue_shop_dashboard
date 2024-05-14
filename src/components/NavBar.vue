@@ -116,9 +116,9 @@
           <span class="absolute -inset-1.5" />
           <span class="sr-only">Open user menu</span>
           <img
-            v-if="userInfo"
+            v-if="storeAuth.user"
             class="object-cover h-8 w-8 rounded-full"
-            :src="HOST_IMAGE + userInfo?.avatar"
+            :src="HOST_IMAGE + storeAuth.user?.avatar"
             alt=""
           />
           <img
@@ -256,7 +256,6 @@ const showCart = () => {
 };
 
 const token = storeAuth.getToken;
-const userInfo = ref(null);
 const logout = async () => {
   storeAuth.storeLogout();
   router.push("/login");
@@ -275,7 +274,6 @@ const searchProduct = async () => {
 };
 onBeforeMount(async () => {
   const res = await getAllCategory();
-  userInfo.value = storeAuth.getUser;
   categories.value = res;
 });
 </script>

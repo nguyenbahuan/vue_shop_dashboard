@@ -23,7 +23,7 @@ export const authStore = defineStore("authStore", () => {
       console.error("Error fetching data:", error);
     }
   };
-  const checkOutStore = async (form) => {
+  const checkOutStore = async (form = { token: getToken.value }) => {
     const res = await authService.checkOutToken(form);
     if (res.status === 401 || res.status === 403) {
       router.push({ name: "login" });
