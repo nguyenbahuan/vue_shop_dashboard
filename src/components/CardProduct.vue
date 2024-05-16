@@ -1,100 +1,124 @@
 <template>
   <div
-    class="grid grid-rows-auto-rows w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-5 group"
+    class="grid grid-rows-auto-rows group my-3 w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
   >
     <router-link
+      class="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
       v-if="product.images.length > 0"
       :to="{ name: 'productdetais', params: { id: product.id } }"
     >
-      <div
-        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7"
+      <img
+        class="peer absolute top-0 right-0 h-full w-full object-contain"
+        :src="HOST_IMAGE + product.images[0]?.imageName"
+        alt="product image"
+      />
+      <img
+        class="peer absolute top-0 -right-96 h-full w-full object-contain transition-all delay-100 duration-1000 hover:right-0 peer-hover:right-0"
+        :src="HOST_IMAGE + product.images[1]?.imageName"
+        alt="product image"
+      />
+      <!-- <div class="absolute bottom-0 mb-4 flex space-x-4 w-full justify-center">
+        <div
+          class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"
+        ></div>
+        <div
+          class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"
+        ></div>
+        <div
+          class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"
+        ></div>
+      </div> -->
+      <svg
+        class="pointer-events-none absolute inset-x-0 bottom-5 mx-auto text-3xl text-white transition-opacity group-hover:animate-ping group-hover:opacity-30 peer-hover:opacity-0"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        role="img"
+        width="1em"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 32 32"
       >
-        <img
-          class="p-8 rounded-t-lg h-full w-full object-cover object-center group-hover:opacity-75"
-          :src="HOST_IMAGE + product.images[0]?.imageName"
-          alt="product image"
+        <path
+          fill="currentColor"
+          d="M2 10a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v10a4 4 0 0 1-2.328 3.635a2.996 2.996 0 0 0-.55-.756l-8-8A3 3 0 0 0 14 17v7H6a4 4 0 0 1-4-4V10Zm14 19a1 1 0 0 0 1.8.6l2.7-3.6H25a1 1 0 0 0 .707-1.707l-8-8A1 1 0 0 0 16 17v12Z"
         />
-      </div>
+      </svg>
+      <!-- <span class="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">39% OFF</span> -->
     </router-link>
-
     <router-link
       v-else
       :to="{ name: 'productdetais', params: { id: product.id } }"
-      ><img
-        class="p-8 rounded-t-lg"
+    >
+      <img
+        class="peer absolute top-0 right-0 h-full w-full object-cover"
         src="https://flowbite.com/docs/images/products/apple-watch.png"
         alt="product image"
-    /></router-link>
-    <div class="grid grid-rows-auto-rows-2 px-5 pb-5">
+      />
+      <img
+        class="peer absolute top-0 -right-96 h-full w-full object-cover transition-all delay-100 duration-1000 hover:right-0 peer-hover:right-0"
+        src="https://flowbite.com/docs/images/products/apple-watch.png"
+        alt="product image"
+      />
+
+      <svg
+        class="pointer-events-none absolute inset-x-0 bottom-5 mx-auto text-3xl text-white transition-opacity group-hover:animate-ping group-hover:opacity-30 peer-hover:opacity-0"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        role="img"
+        width="1em"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 32 32"
+      >
+        <path
+          fill="currentColor"
+          d="M2 10a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v10a4 4 0 0 1-2.328 3.635a2.996 2.996 0 0 0-.55-.756l-8-8A3 3 0 0 0 14 17v7H6a4 4 0 0 1-4-4V10Zm14 19a1 1 0 0 0 1.8.6l2.7-3.6H25a1 1 0 0 0 .707-1.707l-8-8A1 1 0 0 0 16 17v12Z"
+        />
+      </svg>
+    </router-link>
+    <div class="grid grid-rows-auto-rows-2 mt-4 px-5 pb-5">
       <router-link :to="{ name: 'productdetais', params: { id: product.id } }">
         <h5
-          class="line-clamp-2 pt-4 font-semibold tracking-tight text-gray-900 dark:text-white text-ellipsis"
+          class="text-base tracking-tight text-slate-900 font-medium line-clamp-2"
         >
           {{ props.product.name }}
         </h5>
       </router-link>
-
-      <div class="flex items-center mt-2.5 mb-5">
-        <star-rating
-          :read-only="true"
-          :increment="0.01"
-          :fixed-points="1"
-          :star-size="20"
-          :rating="props.product.rating || 0"
-          active-color="#ffd700"
-          text-class="custom-text"
-        ></star-rating>
-      </div>
+      <star-rating
+        :read-only="true"
+        :increment="0.01"
+        :fixed-points="1"
+        :star-size="20"
+        :rating="props.product.rating || 0"
+        active-color="#ffd700"
+        text-class="custom-text"
+      ></star-rating>
       <div
         v-if="props.product.discountPercentage > 0"
-        class="flex items-end justify-around flex-col"
+        class="mt-2 mb-5 flex items-center justify-between"
       >
-        <div>
-          <span class="text-base text-gray-900 dark:text-white"
-            ><label class="line-through">{{
-              FormatPrice(props.product.price)
-            }}</label>
-            <!-- <small class="bg-rose-50 rounded-lg text-red-500 p-1 m-1">
-              {{ props.product.discountPercentage }}%</small
-            > -->
-          </span>
-          <span class="text-base font-bold text-gray-900 dark:text-white">{{
+        <p>
+          <span class="text-base font-bold text-slate-900">{{
             FormatPrice(props.product.priceDiscount)
           }}</span>
-        </div>
-
-        <!-- <router-link :to="{ name: 'productdetais', params: { id: product.id } }"
-          ><button
-            class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Xem chi tiết
-          </button>
-        </router-link> -->
+          <span class="ml-2 text-sm text-slate-900 line-through">{{
+            FormatPrice(props.product.price)
+          }}</span>
+        </p>
       </div>
-      <div v-else class="flex items-end justify-around flex-col">
-        <span class="text-base font-bold text-gray-900 dark:text-white">{{
-          FormatPrice(props.product.price)
-        }}</span>
-
-        <!-- <router-link :to="{ name: 'productdetais', params: { id: product.id } }"
-          ><button
-            class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Xem chi tiết
-          </button>
-        </router-link> -->
+      <div v-else class="mt-2 mb-5 flex items-center justify-between">
+        <p>
+          <span class="text-base font-bold text-slate-900">{{
+            FormatPrice(props.product.price)
+          }}</span>
+        </p>
       </div>
-
-      <div class="flex justify-center">
-        <button
-          @click="
-            router.push({ name: 'productdetais', params: { id: product.id } })
-          "
-          class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Xem chi tiết
-        </button>
-      </div>
+      <router-link
+        :to="{ name: 'productdetais', params: { id: product.id } }"
+        class="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+      >
+        Xem chi tiết</router-link
+      >
     </div>
   </div>
 </template>
@@ -105,7 +129,6 @@ import { defineProps } from "vue";
 import { HOST_IMAGE } from "@/constants/index";
 
 import StarRating from "vue-star-rating";
-import router from "@/router";
 
 const props = defineProps({
   product: Object,
